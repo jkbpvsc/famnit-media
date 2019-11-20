@@ -14,7 +14,7 @@ const server = app.listen(process.env.PORT || 3000, function () {
 let connection;
 
 function handleDisconnect() {
-  connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+  connection = mysql.createConnection(process.env.DATABASE_URL);
   global.db = connection;
 
   connection.connect(function(err) {

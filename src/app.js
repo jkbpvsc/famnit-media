@@ -3,6 +3,7 @@ import express from 'express'
 import exampleRouter from './routers/example/example'
 import authRouter from './routers/auth'
 import * as mysql from 'mysql'
+import cors from 'cors'
 
 const app = express();
 const server = app.listen(process.env.PORT || 5000, function () {
@@ -36,6 +37,8 @@ let connection;
 
 handleDisconnect();
 */
+
+app.use(cors)
 
 app.use(express.json());
 app.use('/auth', authRouter);

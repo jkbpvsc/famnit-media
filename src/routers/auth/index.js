@@ -7,6 +7,7 @@ import { protectedRoute } from '../../middleware/protected';
 const router = Router()
 
 router.post('/token', async (req, res, next) => {
+    console.log('started executing token sctipt')
     const { id_token, youtube_api_access_token } = req.body
     try {
         await verifyToken(id_token)

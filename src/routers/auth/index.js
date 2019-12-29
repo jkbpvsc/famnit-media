@@ -12,7 +12,9 @@ router.post('/token', async (req, res, next) => {
         await verifyToken(id_token)
     } catch(e) {
         console.log(e)
-        next({ status:404, err_code: e.message })
+        res.status(400).json({
+            err_code: 'INVALID_ID_TOKEN' 
+        })
         return
     }
 
@@ -22,7 +24,9 @@ router.post('/token', async (req, res, next) => {
             await getYoutubeAccessToken(youtube_api_access_token)
     } catch(e) {
         console.log(e)
-        next({ status:404, err_code: e.message })
+        res.status(400).json({
+            err_code: 'INVALID_API_TOKEN' 
+        })
         return
     }
 

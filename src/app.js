@@ -1,10 +1,12 @@
 require('dotenv').config()
-const express = require('express');
-const app = express();
-const exampleRouter = require('../src/routers/example')
-const mysql = require('mysql')
+import express from 'express'
+import exampleRouter from './routers/example/example'
+import authRouter from './routers/auth'
 
-const server = app.listen(process.env.PORT || 3000, function () {
+import * as mysql from 'mysql'
+
+const app = express();
+const server = app.listen(process.env.PORT || 5000, function () {
    const host = server.address().address || 'localhost'
    const port = server.address().port
    
@@ -13,7 +15,7 @@ const server = app.listen(process.env.PORT || 3000, function () {
 
 let connection;
 
-function handleDisconnect() {
+/* function handleDisconnect() {
   connection = mysql.createConnection(process.env.DATABASE_URL);
   global.db = connection;
 
@@ -34,9 +36,11 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
+*/
 
 app.use(express.json());
 
+app.use('/auth', authRouter);
 app.use('/example', exampleRouter);
 
 // match with this if no other route catches

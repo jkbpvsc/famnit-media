@@ -2,7 +2,6 @@ require('dotenv').config()
 import express from 'express'
 import exampleRouter from './routers/example/example'
 import authRouter from './routers/auth'
-import cors from 'cors'
 import * as mysql from 'mysql'
 
 const app = express();
@@ -38,11 +37,7 @@ let connection;
 handleDisconnect();
 */
 
-
-
 app.use(express.json());
-
-app.use(cors)
 app.use('/auth', authRouter);
 app.use('/example', exampleRouter);
 

@@ -2,12 +2,12 @@ import {Video} from "../models/video";
 import v4 from 'uuid/v4';
 
 export async function createVideo (
-  { video_id, title, description }
+  { youtube_video_id, title, description }
 ) {
   return Video.create(
     {
       id: v4(),
-      video_id,
+      youtube_video_id,
       title,
       description,
     }
@@ -26,13 +26,14 @@ export async function getVideoById (
 
 export async function updateVideoById (
   id,
-  { title, description },
+  { title, description, youtube_video_id },
 ) {
   return Video.update(
     {
       id,
       title,
       description,
+      youtube_video_id,
     }
   )
 }

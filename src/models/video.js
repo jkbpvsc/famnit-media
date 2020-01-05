@@ -12,7 +12,7 @@ export function createVideoModel (
         primaryKey: true,
         allowNull: false,
       },
-      video_id: {
+      youtube_video_id: {
         type: STRING(64),
         allowNull: false,
       },

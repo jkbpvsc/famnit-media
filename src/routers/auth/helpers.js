@@ -1,4 +1,3 @@
-import { GOOGLE_OAUTH_BASE_URI } from '../../config';
 import * as axios from 'axios';
 
 export async function verifyToken(token) {
@@ -6,6 +5,6 @@ export async function verifyToken(token) {
 }
 
 export async function getYoutubeAccessToken(access_token) {
-  console.log(`${GOOGLE_OAUTH_BASE_URI}tokeninfo?access_token=${access_token}`)
-    return axios.get(`${GOOGLE_OAUTH_BASE_URI}tokeninfo?access_token=${access_token}`)
+  const baseUrl = process.env.GOOGLE_OAUTH_BASE_URI;
+  return axios.get(`${baseUrl}tokeninfo?access_token=${access_token}`)
 }

@@ -1,2 +1,4 @@
 .idea/
+google-credentials.json
 node_modules/
+.env

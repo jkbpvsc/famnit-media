@@ -1,16 +1,16 @@
 import * as jwt from 'jsonwebtoken'
-import { SERVER_PRIVATE_KEY } from '../config'
 
 export async function protectedRoute (req, res, next) {
   try {
-    const authorizationToken = req.headers.authorization.replace('Bearer ', '')
-    const decodedToken = jwt.verify(authorizationToken, SERVER_PRIVATE_KEY);
-    req.tokenData = decodedToken;
-    next()
+    if (req.headers.authorization) {
+      const authorizationToken = req.headers.authorization.replace('Bearer ', '')
+
+      req.tokenData = jwt.verify(authorizationToken, process.env.SERVER_PRIVATE_KEY);
+      next()
+    } else {
+      throw new Error('MISSING AUTH HEADER')
+    }
   } catch (e) {
-    console.log(e)
-    res.status(403).json({
-      err_code: 'TOKEN_EXPIRED'
-    })
+    res.status(403)
   }
 }

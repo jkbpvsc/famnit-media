@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { verifyToken, getYoutubeAccessToken } from './helpers'
 import * as jwt from 'jsonwebtoken'
-import { SERVER_PRIVATE_KEY } from '../../config';
 import { protectedRoute } from '../../middleware/protected';
 
 const router = Router()
@@ -40,7 +39,7 @@ router.post('/token', async (req, res, next) => {
         role: 'admin',
         exp: parseInt(youtubeTokenData.data.exp),
         iss: 'famnit-tutorials'
-     }, SERVER_PRIVATE_KEY);
+     }, process.env.SERVER_PRIVATE_KEY);
 
      res.status(200).json({
          access_token: access_token,

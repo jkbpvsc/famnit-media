@@ -2,10 +2,10 @@ require('dotenv').config()
 
 import {createDatabaseConnection} from "./utils/database";
 import express from 'express'
-import exampleRouter from './routers/example/example'
-import authRouter from './routers/auth'
+import router from './routers'
 import cors from 'cors'
 import {initModels} from "./models";
+import bodyParser from 'body-parser';
 
 const app = express();
 
@@ -13,10 +13,11 @@ const connection = createDatabaseConnection();
 initModels(connection);
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.json());
-app.use('/auth', authRouter);
-app.use('/example', exampleRouter);
+
+app.use(router);
 
 // match with this if no other route catches
 app.use('/', (req, res) => {

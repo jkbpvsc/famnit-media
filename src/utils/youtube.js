@@ -1,38 +1,47 @@
 import { google } from 'googleapis';
 import googleauth from 'google-auth-library';
-import { lookup } from 'mime';
+import mime  from 'mime';
 import { createReadStream } from 'fs'
 
-const youtube = google.youtube();
+const youtube = google.youtube('v3');
 
-const SCOPES = [ 'https://www.googleapis.com/auth/youtube.upload' ]
-
-
-export async function authorize() {
-  const credentials = require('../../google-credentials');
-  return new google.auth.GoogleAuth(
-    {
-      scopes: SCOPES,
-      credentials
-    }
-  );
-}
+const authClient = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.GOOGLE_REDIRECT_URL,
+)
 
 export async function insertVideo (
-  authClient,
+  accessToken,
   videoPath,
+  title,
+  description,
 ) {
-  const videoStream = createReadStream(videoPath);
-  const mimeType = lookup(videoPath);
 
-  const response = await youtube.video.insert(
+  authClient.setCredentials({ access_token: accessToken });
+
+  const videoStream = createReadStream(videoPath);
+  const mimeType = 'application/octet-stream';
+
+  const response = await youtube.videos.insert(
     {
       auth: authClient,
-      requestBody: {},
+      requestBody: {
+        snippet: {
+          title,
+          description,
+        },
+        status: {
+          privacyStatus: 'private'
+        }
+      },
+      part: 'snippet,status',
       media: {
         mimeType,
         body: videoStream,
       }
     }
-  )
+  );
+
+  return response.data;
 }

@@ -1,15 +1,17 @@
 import { Router } from 'express'
 import multer from 'multer';
-import {uploadController} from "../model_controllers";
+import authRouter from "./auth";
+import { protectedRoute } from "../middleware/protected";
+import {createVideo, getVideoById, getVideos, updateVideoById} from "../controllers/video";
 
 const router = new Router();
-const upload = multer({ dest: 'temp/ '})
+const upload = multer({ dest: 'temp'});
 
-router.post(
-  '/upload',
-  upload.single('video'),
-  uploadController,
-);
+router.use('/auth', authRouter);
 
+router.post('/videos', protectedRoute, upload.single('file'), createVideo);
+router.get('/videos', getVideos);
+router.get('/videos/:id', getVideoById);
+router.put('/videos/:id', protectedRoute, updateVideoById);
 
 export default router;

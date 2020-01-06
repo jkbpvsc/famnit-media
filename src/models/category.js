@@ -1,38 +1,38 @@
-import { Model, STRING } from 'sequelize';
-import { Category } from './category';
+import { Model, STRING, TEXT } from 'sequelize';
 
-export class Video extends Model { }
+export class Category extends Model { }
 
-export function createVideoModel (
-  sequelize
+export function createCategoryModel(
+  sequelize,
 ) {
-  Video.init(
+  Category.init(
     {
       id: {
         type: STRING(64),
         primaryKey: true,
-        allowNull: false,
       },
-      youtube_video_id: {
+      name: {
         type: STRING(64),
         allowNull: false,
       },
-      title: {
+      slug: {
         type: STRING(64),
         allowNull: false,
+        unique: true,
       },
       description: {
-        type: STRING,
+        type: TEXT,
         allowNull: true,
       },
-      category: {
+      parent_category_id: {
         type: STRING(64),
+        allowNull: true,
         references: {
           model: Category,
           key: 'id',
         }
       }
     },
-    { sequelize, modelName: 'video'}
-  );
+    { sequelize, modelName: 'category' }
+  )
 }

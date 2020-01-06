@@ -24,11 +24,11 @@ export async function updateVideoById (
   res
 ) {
   const id = req.params.id;
-  const { title, description } = req.body;
+  const { title, description, category } = req.body;
 
   await model.updateVideoById(
     id,
-    { title, description },
+    { title, description, category },
   );
 
   res.code(200).send();
@@ -38,9 +38,9 @@ export async function createVideo (
   req,
   res,
 ) {
-  const { title, description, youtube_video_id } = req.body;
+  const { title, description, youtube_video_id, category } = req.body;
   await model.createVideo(
-    { youtube_video_id, title, description },
+    { youtube_video_id, title, description, category },
   );
 
   res.send(200);

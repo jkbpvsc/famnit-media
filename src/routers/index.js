@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { protectedRoute, adminRoute } from "../middleware/protected";
+import { adminRoute } from "../middleware/protected";
 import { createVideo, getVideoById, getVideos, updateVideoById } from "../controllers/video";
 import { login, addUser } from '../controllers/user';
 import { verifyToken } from '../controllers/auth';
@@ -13,7 +13,7 @@ const router = new Router();
 router.post('/videos', adminRoute, createVideo);
 router.get('/videos', getVideos);
 router.get('/videos/:id', getVideoById);
-router.put('/videos/:id', protectedRoute, updateVideoById);
+router.put('/videos/:id', adminRoute, updateVideoById);
 router.delete('/video/:id', adminRoute, deleteVideoById);
 router.get('/categories/:id/videos', getVideoByCategoryId);
 
@@ -28,6 +28,6 @@ router.delete('/categories/:id', adminRoute, deleteCategoryById);
 // User / Auth routes
 router.post('/login', login);
 router.post('/user', adminRoute, addUser);
-router.get('/verify', protectedRoute, verifyToken);
+router.get('/verify', adminRoute, verifyToken);
 
 export default router;

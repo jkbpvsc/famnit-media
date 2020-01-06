@@ -11,7 +11,6 @@ export async function createUser (
   username,
   password_hash,
   password_salt,
-  admin,
 ) {
   await User.create(
     {
@@ -19,7 +18,6 @@ export async function createUser (
       username,
       password_hash,
       password_salt,
-      admin,
     }
   )
 }

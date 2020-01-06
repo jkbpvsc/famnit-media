@@ -2,7 +2,6 @@ import { getUserByUsername, createUser } from "../model_controllers/user";
 import { hashSync, genSaltSync } from 'bcrypt'
 import { sign } from 'jsonwebtoken';
 
-
 const SALT_ROUNDS = 10000;
 
 export async function login (
@@ -22,7 +21,7 @@ export async function login (
   }
 
   const accessToken = sign(
-    { username, id: user.id, admin: user.admin },
+    { username, id: user.id },
     process.env.JWT_SECRET
   )
 
@@ -36,7 +35,6 @@ export async function addUser (
   const { 
     username,
     password,
-    admin,
   } = req.body;
 
   const salt = genSaltSync(SALT_ROUNDS);
@@ -46,7 +44,6 @@ export async function addUser (
     username,
     hashedPassword,
     salt,
-    admin,
   );
 
   res.code(200).send();

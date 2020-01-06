@@ -24,11 +24,6 @@ export function createUserModel (
       password_salt: {
         type: STRING,
         allowNull: false,
-      },
-      admin: {
-        type: BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
       }
     },
     { sequelize, modelName: 'user' }

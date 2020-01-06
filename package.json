@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/app.js",
+    "start": "node dest/app.js",
+    "build": "./node_modules/.bin/babel src --out-dir dest",
     "start-dev": "nodemon --exec babel-node src/app.js"
   },
   "keywords": [],
@@ -26,9 +27,11 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
+    "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
-    "@babel/preset-env": "^7.7.7"
+    "@babel/preset-env": "^7.7.7",
+    "build": "^0.1.4",
+    "nodemon": "^2.0.2"
   }
 }

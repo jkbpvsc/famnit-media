@@ -9,6 +9,8 @@ import { deleteVideoById, getVideoByCategoryId } from '../model_controllers/vide
 
 const router = new Router();
 
+router.get('/', (_, res) => res.send('ok'))
+
 // Video routes
 router.post('/videos', adminRoute, createVideo);
 router.get('/videos', getVideos);

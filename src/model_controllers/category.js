@@ -16,21 +16,21 @@ export async function getCategoryByParentCategoryId (
 ) {
     return Category.findAll(
         { where: { parent_category_id: parentCategoryId }}
-    )
+    );
 }
 
 export async function updateCategoryById (
     id,
-    { description, name, slug, parent_category_id }
+    { description, name, slug, parent_category_id, icon_url }
 ) {
     await Category.update(
-        { description, name, slug, parent_category_id },
+        { description, name, slug, parent_category_id, icon_url },
         { where: { id }},
-    )
+    );
 }
 
 export async function createCategory (
-    { description, name, slug, parent_category_id }
+    { description, name, slug, parent_category_id, icon_url }
 ) {
     await Category.create(
         { 
@@ -39,6 +39,15 @@ export async function createCategory (
             name,
             slug,
             parent_category_id,
+            icon_url,
         },
-    )
+    );
+}
+
+export async function deleteCategoryById (
+    id,
+) {
+    await Category.destroy(
+        { where: { id } }
+    );
 }

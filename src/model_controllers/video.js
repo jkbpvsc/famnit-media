@@ -39,3 +39,19 @@ export async function updateVideoById (
     }
   )
 }
+
+export async function deleteVideoById (
+  id,
+) {
+  await Video.destroy(
+    { where: { id } }
+  );
+};
+
+export async function getVideoByCategoryId (
+  categoryId,
+) {
+  return Video.findAll(
+    { where: { category: categoryId } }
+  )
+}

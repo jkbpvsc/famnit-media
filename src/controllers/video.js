@@ -45,3 +45,13 @@ export async function createVideo (
 
   res.send(200);
 }
+
+export async function deleteVideo (
+  req,
+  res,
+) {
+  const id = req.params.id;
+  await model.deleteVideoById(id);
+
+  res.code(200).send();
+}

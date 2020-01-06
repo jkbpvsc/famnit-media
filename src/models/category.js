@@ -31,6 +31,10 @@ export function createCategoryModel(
           model: Category,
           key: 'id',
         }
+      },
+      icon_url: {
+        type: STRING,
+        allowNull: true,
       }
     },
     { sequelize, modelName: 'category' }

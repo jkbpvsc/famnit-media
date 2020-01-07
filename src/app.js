@@ -20,11 +20,6 @@ app.use(express.json());
 
 app.use(router);
 
-// match with this if no other route catches
-app.use('/', (req, res) => {
-   res.send('ERR_ROUTE_NOT_DEFINED')
-});
-
 const server = app.listen(process.env.PORT || 5000, async function () {
    const host = server.address().address || 'localhost';
    const port = server.address().port;

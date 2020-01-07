@@ -51,3 +51,11 @@ export async function deleteCategoryById (
         { where: { id } }
     );
 }
+
+export async function getCategoryBySlug(
+  slug
+) {
+  return Category.findAll(
+    { where: { slug } }
+  )
+}

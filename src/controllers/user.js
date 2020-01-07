@@ -15,7 +15,7 @@ export async function login (
   const hashedPassword = hashSync(password, user.password_salt);
   if (hashedPassword !== user.password_hash) {
     res
-    .code(403)
+    .status(403)
     .send();
     return;
   }
@@ -46,5 +46,5 @@ export async function addUser (
     salt,
   );
 
-  res.code(200).send();
+  res.status(200).send();
 }

@@ -3,7 +3,14 @@ import { adminRoute } from "../middleware/protected";
 import { createVideo, getVideoById, getVideos, updateVideoById } from "../controllers/video";
 import { login, addUser } from '../controllers/user';
 import { verifyToken } from '../controllers/auth';
-import { getCategories, getSubcategories, getCategoryById, updateCategoryById, createCategory } from '../controllers/category';
+import {
+  getCategories,
+  getSubcategories,
+  getCategoryById,
+  updateCategoryById,
+  createCategory,
+  getCategoryBySlug
+} from '../controllers/category';
 import { deleteCategoryById } from '../model_controllers/category';
 import { deleteVideoById, getVideoByCategoryId } from '../model_controllers/video';
 
@@ -21,6 +28,7 @@ router.get('/categories/:id/videos', getVideoByCategoryId);
 
 // Category routes
 router.get('/categories', getCategories);
+router.get('/categories/slug/:slug', getCategoryBySlug);
 router.get('/categories/:id/subcategories', getSubcategories);
 router.get('/categories/:id', getCategoryById);
 router.put('/categories/:id', adminRoute, updateCategoryById);

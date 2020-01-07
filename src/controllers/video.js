@@ -31,7 +31,7 @@ export async function updateVideoById (
     { title, description, category },
   );
 
-  res.code(200).send();
+  res.status(200).send();
 }
 
 export async function createVideo (
@@ -43,7 +43,7 @@ export async function createVideo (
     { youtube_video_id, title, description, category },
   );
 
-  res.send(200);
+  res.status(200).send();
 }
 
 export async function deleteVideo (
@@ -53,5 +53,5 @@ export async function deleteVideo (
   const id = req.params.id;
   await model.deleteVideoById(id);
 
-  res.code(200).send();
+  res.status(200).send();
 }

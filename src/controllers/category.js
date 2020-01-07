@@ -34,7 +34,7 @@ export async function createCategory (
         { name, slug, description, parent_category_id, icon_url }
     );
 
-    res.code(200).send();
+    res.status(200).send();
 }
 
 export async function getSubcategories (
@@ -60,12 +60,12 @@ export async function updateCategoryById (
         icon_url,
     } = req.body;
 
-    model.updateCategoryById(
+    await model.updateCategoryById(
         id,
         { description, name, slug, parent_category_id, icon_url },
     );
 
-    res.code(200).json();
+    res.status(200).json();
 }
 
 export async function deleteCategory (
@@ -75,5 +75,15 @@ export async function deleteCategory (
     const id = req.params.id;
     await model.deleteCategoryById(id);
   
-    res.code(200).send();
-  }
+    res.status(200).send();
+}
+
+export async function getCategoryBySlug(
+  req,
+  res,
+) {
+    const slug = req.params.slug;
+    const data = await model.getCategoryBySlug(slug);
+
+    res.json(data).send();
+}

@@ -9,9 +9,9 @@ import {
   getCategoryById,
   updateCategoryById,
   createCategory,
-  getCategoryBySlug
+  getCategoryBySlug,
+  deleteCategoryById,
 } from '../controllers/category';
-import { deleteCategoryById } from '../model_controllers/category';
 import { deleteVideoById, getVideoByCategoryId } from '../model_controllers/video';
 
 const router = new Router();

@@ -68,7 +68,7 @@ export async function updateCategoryById (
     res.status(200).json();
 }
 
-export async function deleteCategory (
+export async function deleteCategoryById (
     req,
     res,
   ) {

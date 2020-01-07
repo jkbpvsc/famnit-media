@@ -46,7 +46,7 @@ export async function createVideo (
   res.status(200).send();
 }
 
-export async function deleteVideo (
+export async function deleteVideoById (
   req,
   res,
 ) {
@@ -54,4 +54,14 @@ export async function deleteVideo (
   await model.deleteVideoById(id);
 
   res.status(200).send();
+}
+
+export async function getVideoByCategoryId (
+  req,
+  res,
+) {
+  const id = req.params.id;
+  const data = await model.getVideoByCategoryId(id);
+
+  res.json(data).send();
 }

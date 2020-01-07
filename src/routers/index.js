@@ -1,6 +1,13 @@
 import { Router } from 'express'
 import { adminRoute } from "../middleware/protected";
-import { createVideo, getVideoById, getVideos, updateVideoById } from "../controllers/video";
+import { 
+    createVideo,
+    getVideoById, 
+    getVideos, 
+    updateVideoById,
+    deleteVideoById,
+    getVideoByCategoryId,
+} from "../controllers/video";
 import { login, addUser } from '../controllers/user';
 import { verifyToken } from '../controllers/auth';
 import {
@@ -12,7 +19,6 @@ import {
   getCategoryBySlug,
   deleteCategoryById,
 } from '../controllers/category';
-import { deleteVideoById, getVideoByCategoryId } from '../model_controllers/video';
 
 const router = new Router();
 

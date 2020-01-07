@@ -29,15 +29,15 @@ export async function updateVideoById (
   id,
   { title, description, youtube_video_id, category },
 ) {
-  return Video.update(
+  await Video.update(
     {
-      id,
       title,
       description,
       youtube_video_id,
       category
-    }
-  )
+    }, 
+    { where: { id } }
+  );
 }
 
 export async function deleteVideoById (
